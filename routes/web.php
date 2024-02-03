@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+/**
+ * Frontend Controller
+ */
+Route::controller(FrontendController::class)->group(function(){
+    Route::get('/', 'index')->name('frontend.home');
 });
 
+
+
+
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('backend.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
